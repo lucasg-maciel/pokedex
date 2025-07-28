@@ -16,6 +16,15 @@ class HttpService {
       return null;
   }
 
+  Future<Response?> post(String path, {Map<String, dynamic>? data}) async {
+    try {
+      Response res = await _dio.post(path, data: data);
+      return res;
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
 
 
 }

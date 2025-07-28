@@ -1,8 +1,12 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/controllers/home_page_controller.dart';
 import 'package:pokedex/models/home_page_data.dart';
 import 'package:pokedex/models/pokemon.dart';
+import 'package:pokedex/pages/capture_pokemons.dart';
+import 'package:pokedex/pages/captured_pokemons.dart';
 import 'package:pokedex/providers/favorite_pokemons_provider.dart';
 import 'package:pokedex/widgets/pokemon_card.dart';
 import 'package:pokedex/widgets/pokemon_list_tile.dart';
@@ -75,6 +79,30 @@ class _HomePageState extends ConsumerState<HomePage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _favoritePokemonsList(context),
+              TextButton(
+                onPressed: () {
+                  Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => CapturePokemonPage(
+                      pokemonURL: _favoritePokemons[Random().nextInt(_favoritePokemons.length)],
+                    ),
+                  ));
+                },
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                child: Text('Capture Favorite Pokemon', style: TextStyle(fontSize: 20, color: Colors.white)),
+              ),
+              TextButton(onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => CapturedPokemonsPage()
+                ));
+              }, 
+              style: TextButton.styleFrom(
+                backgroundColor: Colors.red,
+                foregroundColor: Colors.white,
+              ),
+              child: Text('Captured Pokemon')),
               _allpokemonList(context),
             ],
           ),
