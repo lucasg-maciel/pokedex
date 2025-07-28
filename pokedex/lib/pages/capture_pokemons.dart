@@ -25,7 +25,6 @@ class _CapturePokemonPageState extends ConsumerState<CapturePokemonPage> {
 
   @override
   Widget build(BuildContext context) {
-    print(widget.pokemonURL);
     final pokemon = ref.watch(pokemonDataProvider(widget.pokemonURL));
     return Scaffold(
       appBar: AppBar(
@@ -94,6 +93,7 @@ class _CapturePokemonPageState extends ConsumerState<CapturePokemonPage> {
                 });
                 if(rng == 2 || rng == 5 || rng == 8) {
                   await ref.read(favoritePokemonsProvider.notifier).postCapturedPokemon(pokemon!.id.toString());
+                  ref.read(favoritePokemonsProvider.notifier).removeFavoritePokemon(widget.pokemonURL);
                   Navigator.of(context).pop();
                 }
               } : null,

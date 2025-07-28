@@ -12,7 +12,6 @@ final pokemonDataProvider = FutureProvider.family<Pokemon?, String>((ref, String
   if(res != null && res.data != null){
     return Pokemon.fromJson(res.data);
   }
-
   return null;
 
 });
