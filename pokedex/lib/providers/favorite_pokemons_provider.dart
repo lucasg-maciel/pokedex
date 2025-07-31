@@ -43,7 +43,7 @@ Future<void> postCapturedPokemon(String id) async {
     };
 
     
-    final response = await _httpService.post('https://pokedex-api-i5r9.onrender.com/api/v1/pokedex', 
+    final response = await _httpService.post('https://pokedex-api-lmk9.onrender.com/api/v1/pokedex', 
       data: requestData
     );
 
@@ -53,6 +53,16 @@ Future<void> postCapturedPokemon(String id) async {
     print('Error capturing pokemon: $e');
   }
 }
+
+void deleteCapturedPokemon(int id) async {
+    try {
+      final response = await _httpService.delete('https://pokedex-api-lmk9.onrender.com/api/v1/pokedex/1b99dda1-757f-4d4f-838b-f160dd00104d/${id.toString()}');
+      
+      _ref.invalidate(capturedPokemonProvider);
+    } catch (e) {
+      print('Error deleting captured pokemon: $e');
+    }
+  }
 
   void removeFavoritePokemon(String url) {
     state = state.where((e) => e != url).toList();

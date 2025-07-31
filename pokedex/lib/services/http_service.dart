@@ -26,5 +26,15 @@ class HttpService {
     return null;
   }
 
+  Future<Response?> delete(String path) async {
+    try {
+      Response res = await _dio.delete(path);
+      return res;
+    } catch (e) {
+      print(e);
+    }
+    return null;
+  }
+
 
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pokedex/providers/captured_pokemons_provider.dart';
+import 'package:pokedex/providers/favorite_pokemons_provider.dart';
 import 'package:pokedex/providers/pokemon_data_provider.dart';
 
 class CapturedPokemonsPage extends ConsumerWidget {
@@ -27,11 +28,34 @@ class CapturedPokemonsPage extends ConsumerWidget {
               return pokemonData.when(
                 data: (pokemon) {
                   print('Pokemon Data: ${pokemon?.name}');
-                  return ListTile(
-                    title: Text(pokemon?.name?.toUpperCase() ?? 'Unknown Pokemon', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black)),
-                    leading: CircleAvatar(
-                      backgroundImage: pokemon?.sprites?.frontDefault != null ? NetworkImage(pokemon!.sprites!.frontDefault!) : null,
-                      radius: 30,
+                  return Card(
+                    margin: const EdgeInsets.all(8.0),
+                    elevation: 5,
+                    color: Colors.grey[300],
+                    child: ListTile(
+                      title: Text(pokemon?.name?.toUpperCase() ?? 'Unknown Pokemon', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.black)),
+                      leading: CircleAvatar(
+                        backgroundImage: pokemon?.sprites?.frontDefault != null ? NetworkImage(pokemon!.sprites!.frontDefault!) : null,
+                        radius: 35,
+                      ),
+                      trailing: TextButton(
+                        style: TextButton.styleFrom(
+                          foregroundColor: Colors.black,
+                          backgroundColor: Colors.grey[300],
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+                        ),
+                        child: const Text('Release', style: TextStyle(color: Colors.red, fontWeight: FontWeight.bold)),
+                        onPressed: () {
+                         ref.read(favoritePokemonsProvider.notifier).deleteCapturedPokemon(pokemon?.id ?? 0);
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text('${pokemon?.name} released!'),
+                              duration: const Duration(seconds: 2),
+                            ),
+                          );
+                        },
+                      ),
+                      
                     ),
                   );
                 },
