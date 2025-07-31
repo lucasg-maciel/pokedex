@@ -28,8 +28,9 @@ class _CapturePokemonPageState extends ConsumerState<CapturePokemonPage> {
     final pokemon = ref.watch(pokemonDataProvider(widget.pokemonURL));
     return Scaffold(
       appBar: AppBar(
-        title: Text('Capture Favorite Pokemon'),
+        title: Text('Capture Favorite Pokemon', style: TextStyle(fontSize: 22, color: Colors.white, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.red,
+        foregroundColor: Colors.white,
       ),
       body: pokemon.when(
         data: (data) {
@@ -65,18 +66,18 @@ class _CapturePokemonPageState extends ConsumerState<CapturePokemonPage> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             Text(
-              'Número Sorteado: ${rng.toString()}',
+              'Drawn number: ${rng.toString()}',
               style: TextStyle(fontSize: 20),
             ),
             if(rng != 0)
             if (rng == 2 || rng == 5 || rng == 8)
               Text(
-                'Parabéns! Você capturou o Pokémon!',
+                'Pokémon captured successfully!',
                 style: TextStyle(fontSize: 20, color: Colors.green),
               )
             else
               Text(
-                'Tente novamente!',
+                'Try again! Pokémon not captured.',
                 style: TextStyle(fontSize: 20, color: Colors.red),
               ),
             Spacer(),
@@ -99,6 +100,8 @@ class _CapturePokemonPageState extends ConsumerState<CapturePokemonPage> {
               } : null,
               icon: Icon(Icons.catching_pokemon, size: 70),
             ),
+            SizedBox(height: 15),
+
             Text(
               'You have $countBalls Pokeballs',
               style: TextStyle(fontSize: 20),

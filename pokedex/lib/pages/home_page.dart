@@ -76,9 +76,12 @@ class _HomePageState extends ConsumerState<HomePage> {
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            crossAxisAlignment: CrossAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               _favoritePokemonsList(context),
+              SizedBox(
+                height: 20,
+              ),
               TextButton(
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(
@@ -91,7 +94,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                   backgroundColor: Colors.red,
                   foregroundColor: Colors.white,
                 ),
-                child: Text('Capture Favorite Pokemon', style: TextStyle(fontSize: 20, color: Colors.white)),
+                child: Text('Capture Favorite Pokemon', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
               ),
               TextButton(onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -102,7 +105,11 @@ class _HomePageState extends ConsumerState<HomePage> {
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
               ),
-              child: Text('Captured Pokemon')),
+              child: Text('Captured Pokemon', style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold)),
+              ),
+                            SizedBox(
+                height: 20,
+              ),
               _allpokemonList(context),
             ],
           ),
